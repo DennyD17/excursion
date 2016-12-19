@@ -1,0 +1,56 @@
+{% extends "ex/main_page.html" %}
+{% block title %}
+    <title>Экскурсии</title>
+{% endblock %}
+{% block content %}
+{% if Error_message %}
+    <p>{{Error_message}}</p>
+{% else %}
+    <div class="col-lg-2 col-md-4 col-xs-12">
+        <ul class="nav nav-pills nav-stacked" >
+            {% if slug %}
+                {% for ex in list_of_excursions %}
+                    {% if ex.slug == slug %}
+                        <li class="active"><a href="{% url 'ex:excursions' ex.slug %}">{{ex.name}}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'ex:excursions' ex.slug %}">{{ex.name}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for ex in list_of_excursions %}
+                    {% if forloop.counter == 1 %}
+                        <li class="active"><a href="{% url 'ex:excursions' ex.slug %}">{{ex.name}}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'ex:excursions' ex.slug %}">{{ex.name}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+    <div class="col-lg-10 col-md-8 col-xs-12">
+        <div class="center_place">
+            <h1>{{first.name}}</h1><br>
+            <p>{{first.description| safe}}</p>
+            {% if events %}
+                {% for event in events %}
+                    <table border= "0"  align="center" frame="above" bordercolor="LightGrey"  width="50%">
+                        <tr>
+                            <td height="200" valign="top">
+                                <h1>{{event.starting}}</h1>
+                            </td>
+                        </tr>
+                    </table>
+                        <br><br><br>
+                {% endfor %}
+            {% else %}
+                <h1>Мероприятий нет</h1>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}class="active"{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}{% endblock %}>
+{% block cont_act %}{% endblock %}>
