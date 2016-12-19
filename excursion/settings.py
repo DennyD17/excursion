@@ -26,7 +26,7 @@ CKEDITOR_UPLOAD_PATH = ""
 SECRET_KEY = 'd6o+zq1nxwr2a!^=n*t*8h=b^d@4y^x)3laugdk#err#sz6vy('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 

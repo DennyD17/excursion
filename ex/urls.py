@@ -8,10 +8,10 @@ urlpatterns = [
     url(r'^excursions/$', views.excursions, name='excursions'),
     url(r'^excursions/(?P<slug>[\S]+)/$', views.excursions, name='excursions'),
     url(r'^events$', views.events, name='events'),
+    url(r'^contacts$', views.contacts, name='contacts'),
+
 ]
 """
-url(r'^/events$', ),
-url(r'^/excursions$', ),
 url(r'^/registration$', ),
 url(r'^/registration-individual$', ),
 url(r'^/reviews$', ),

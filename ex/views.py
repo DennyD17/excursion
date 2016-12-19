@@ -2,15 +2,13 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404, Http404
 from django.utils import timezone
 
+from itertools import chain
+
 from . import models
 
 
-def er404(request):
-    return render(request, 'ex/404.html')
-
-
 def start_page(request):
-    about = get_object_or_404(models.About, id=1)
+    about = models.About.objects.all()[0]
     try:
         message = models.ImportantNote.objects.all()[0]
     except IndexError:
@@ -41,3 +39,7 @@ def excursions(request, slug=None):
 def events(request):
     shedule = get_list_or_404(models.Event.objects.order_by('starting'), starting__gte=timezone.now())
     return render(request, 'ex/events.html', {'shedule': shedule})
+
+
+def contacts(request):
+    return render(request, 'ex/contacts.html', {'contacts': models.Contacts.objects.all()[0]})

@@ -1,6 +1,25 @@
+{% extends "ex/main_page.html" %}
+{% block title %}
+    <title>Расписание</title>
+{% endblock %}
+{% block content %}
 {% for event in shedule %}
-    {{event.name}}
-    {{event.description}}
-    {{event.starting}}
+    <table border= "0"  align="center" frame="above" bordercolor="LightGrey"  width="80%">
+        <tr>
+            <td height="200" valign="top">
+                <div class="text-center">
+                    <h1>{{event.name}}</h1>
+                    <p>{{event.starting}}</p>
+                </div>
+                <p>{{event.description| safe | truncatewords:10}}</p>
+            </td>
+        </tr>
+    </table>
     <br><br><br>
 {% endfor %}
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}class="active"{% endblock %}
+{% block zap_act %}{% endblock %}>
+{% block cont_act %}{% endblock %}>

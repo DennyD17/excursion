@@ -1,0 +1,18 @@
+{% extends "ex/main_page.html" %}
+{% block title %}
+    <title>Контакты</title>
+{% endblock %}
+{% block content %}
+    {% if contacts %}
+        <h1>{{contacts.title}}</h1>
+        <p>{{contacts.text}}</p>
+        {% if contacts.img %}
+            <img src="{{about.img.url}}" class="img-rounded">
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}{% endblock %}>
+{% block cont_act %}class="active"{% endblock %}>

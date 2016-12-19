@@ -6,8 +6,22 @@ class ExcursionAdmin (admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
 
 
-admin.site.register(models.About)
-admin.site.register(models.Contacts)
+class OneNoteAdmin (admin.ModelAdmin):
+
+    def has_add_permission(self, request):
+        qs = super(OneNoteAdmin, self).get_queryset(request)
+        num = qs.count()
+        if num > 0:
+            return False
+        else:
+            return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(models.About, OneNoteAdmin)
+admin.site.register(models.Contacts, OneNoteAdmin)
 admin.site.register(models.Event)
 admin.site.register(models.Excursion, ExcursionAdmin)
 admin.site.register(models.ImportantNote)

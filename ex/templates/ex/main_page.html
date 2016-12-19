@@ -38,7 +38,7 @@
                         <li {% block ex_act %} {% endblock %}><a href="{% url 'ex:excursions' %}">Экскурсии</a></li>
                         <li {% block rasp_act %}{% endblock %}><a href="{% url 'ex:events' %}">Расписание</a></li>
                         <li {% block zap_act %}{% endblock %}><a href="/blag/news/">Записаться</a></li>
-                        <li {% block cont_act %}{% endblock %}><a href="/blag/about/">Контакты</a></li>
+                        <li {% block cont_act %}{% endblock %}><a href="{% url 'ex:contacts' %}">Контакты</a></li>
                     </ul>
                 </div>
             </nav>
