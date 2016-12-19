@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404, Http404
 from django.utils import timezone
+from django.http import HttpResponseRedirect
 
-from itertools import chain
-
+from .forms import RegistrationToEventForm
 from . import models
 
 
@@ -43,3 +43,16 @@ def events(request):
 
 def contacts(request):
     return render(request, 'ex/contacts.html', {'contacts': models.Contacts.objects.all()[0]})
+
+
+def reg(request):
+    if request.method == 'POST':
+        form = RegistrationToEventForm(request.POST)
+        if form.is_valid():
+            models.PeopleReg = form.save(commit=False)
+            models.PeopleReg.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = RegistrationToEventForm()
+    people = models.PeopleReg.objects.all()
+    return render(request, 'ex/registration.html', {'form': form, 'people': people})
