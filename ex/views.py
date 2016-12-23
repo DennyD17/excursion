@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404, get_list_or_404, Http404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -21,7 +21,7 @@ def start_page(request):
 
 def excursions(request, slug=None):
     list_of_excursions = models.Excursion.objects.all()
-    if slug == None:
+    if slug is None:
         try:
             start_value = models.Excursion.objects.all()[0]
         except IndexError:
