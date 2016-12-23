@@ -1,8 +1,5 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.utils import dateformat
-
-from excursion import settings
 
 
 class ImportantNote (models.Model):
@@ -53,7 +50,7 @@ class Event(models.Model):
         verbose_name_plural = 'Мероприятия'
 
     def __str__(self):
-        return self.excursion.name + '  ' + str(self.starting)
+        return self.excursion.name + ' - ' + self.starting.strftime("%d.%m.%Y %H:%M")
 
 
 class PeopleReg(models.Model):

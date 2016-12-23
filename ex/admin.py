@@ -20,8 +20,12 @@ class OneNoteAdmin (admin.ModelAdmin):
         return False
 
 
+class Filter(admin.ModelAdmin):
+    list_filter = ('name', )
+
+
 admin.site.register(models.About, OneNoteAdmin)
 admin.site.register(models.Contacts, OneNoteAdmin)
-admin.site.register(models.Event)
+admin.site.register(models.Event, Filter)
 admin.site.register(models.Excursion, ExcursionAdmin)
 admin.site.register(models.ImportantNote)

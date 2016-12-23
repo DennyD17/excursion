@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404, Http404
 from django.utils import timezone
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 
 from .forms import RegistrationToEventForm
 from . import models
+from excursion import settings
 
 
 def start_page(request):
@@ -49,9 +52,13 @@ def reg(request):
     if request.method == 'POST':
         form = RegistrationToEventForm(request.POST)
         if form.is_valid():
-            models.PeopleReg = form.save(commit=False)
-            models.PeopleReg.save()
-            return HttpResponseRedirect('/')
+            form.save()
+            mailto = form.cleaned_data.get('email')
+            mes = form.cleaned_data.get('name') + \
+                ', доброго времени суток! \nПоздравляю, вы успешно записаны на экскурсию ' + \
+                str(form.cleaned_data.get('event'))
+            send_mail('Запись на экскурсию', mes, settings.EMAIL_HOST_USER, ['Denis.Avramenko1705@gmail.com', mailto])
+            return HttpResponseRedirect(reverse('ex:registration'))
     else:
         form = RegistrationToEventForm()
     people = models.PeopleReg.objects.all()

@@ -5,7 +5,7 @@ app_name = 'ex'
 
 urlpatterns = [
     url(r'^$', views.start_page, name='about'),
-    url(r'^excursions/', views.excursions, name='excursions'),
+    url(r'^excursions/$', views.excursions, name='excursions'),
     url(r'^excursions/(?P<slug>[\S]+)/$', views.excursions, name='excursions'),
     url(r'^events$', views.events, name='events'),
     url(r'^contacts$', views.contacts, name='contacts'),
