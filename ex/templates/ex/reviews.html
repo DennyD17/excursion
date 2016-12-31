@@ -1,0 +1,46 @@
+{% extends "ex/main_page.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    <title>Отзывы</title>
+{% endblock %}
+{% block content %}
+{% for review in reviews %}
+    <p>{{review.date}}</p>
+    <h4><b>Экскурсия:</b>{{review.excursion}}</h4>
+    <h4><b>Дата посещения:</b>{{review.event_date}}</h4>
+    <h4><b>Отзыв:</b></h4>
+    <p>{{review.text}}</p>
+    <br><br>
+{% endfor %}
+<form method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "ok" %} Оставить отзыв
+    </button>
+  {% endbuttons %}
+</form>
+<div class="text-center">
+    <div class="pagination">
+        <span class="step-links">
+            {% if reviews.has_previous %}
+                <a href="{% url 'ex:reviews' %}?page={{ reviews.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+            <span class="current">
+                Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}
+            </span>
+            {% if reviews.has_next %}
+                <a href="{% url 'ex:reviews' %}?page={{ reviews.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}{% endblock %}>
+{% block cont_act %}{% endblock %}>
+{% block reviews_act %}class="active"{% endblock %}>
+{% block blog %}{% endblock %}

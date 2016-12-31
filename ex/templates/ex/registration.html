@@ -1,15 +1,30 @@
 {% extends "ex/main_page.html" %}
+{% load bootstrap3 %}
 {% block title %}
     <title>Запись на экскурсию</title>
 {% endblock %}
+{% block extrahead %}
+  {{ form.media }}
+{% endblock %}
 {% block content %}
-<form method="POST" >
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
+<h1>{{contacts.title}}</h1>
+<p>{{contacts.text}}</p>
+{% if contacts.img %}
+    <img src="{{about.img.url}}" class="img-rounded">
+{% endif %}
+<form method="post" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      {% bootstrap_icon "star" %} Записаться
+    </button>
+  {% endbuttons %}
 </form>
+
+<h1>{{name}}</h1>
 {% for human in people %}
-    <p>{{human.event}}   {{human.name}}   {{human.email}}   {{human.phone}}</p>
+    <p>{{human.event}}   {{human.name}}   {{human.email}}   {{human.phone}}   {{human.date}}</p>
 {% endfor %}
 {% endblock %}
 {% block main_act %}{% endblock %}
@@ -17,3 +32,4 @@
 {% block rasp_act %}{% endblock %}
 {% block zap_act %}class="active"{% endblock %}>
 {% block cont_act %}{% endblock %}>
+{% block blog %}{% endblock %}

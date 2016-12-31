@@ -24,8 +24,14 @@ class Filter(admin.ModelAdmin):
     list_filter = ('name', )
 
 
+class PeopleTable(admin.ModelAdmin):
+    list_display = ('event', 'date', 'name', 'email', 'phone')
+    ordering = ('-date',)
+
+
 admin.site.register(models.About, OneNoteAdmin)
 admin.site.register(models.Contacts, OneNoteAdmin)
-admin.site.register(models.Event, Filter)
 admin.site.register(models.Excursion, ExcursionAdmin)
 admin.site.register(models.ImportantNote)
+admin.site.register(models.PeopleReg, PeopleTable)
+admin.site.register(models.Blog)

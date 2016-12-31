@@ -34,30 +34,15 @@ class Excursion (models.Model):
         return self.name
 
 
-class Event(models.Model):
-    excursion = models.ForeignKey(Excursion, on_delete=models.CASCADE)
-    starting = models.DateTimeField(verbose_name='Дата мероприятия')
-    img = models.ImageField(upload_to='images', verbose_name='Изображение', blank=True)
-    name = models.CharField(max_length=50, blank=True, editable=False)
-    description = RichTextUploadingField(blank=True, editable=False)
-
-    def save(self, *args, **kwargs):
-        self.name = self.excursion.name
-        self.description = self.excursion.description
-        super(Event, self).save(*args, **kwargs)
-
-    class Meta:
-        verbose_name_plural = 'Мероприятия'
-
-    def __str__(self):
-        return self.excursion.name + ' - ' + self.starting.strftime("%d.%m.%Y %H:%M")
-
-
 class PeopleReg(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Excursion, on_delete=models.CASCADE, verbose_name='Экскурсия')
     name = models.CharField(max_length=25, verbose_name='Имя')
     email = models.EmailField(verbose_name='почта')
-    phone = models.CharField(max_length=10, verbose_name='Номер теллефона')
+    phone = models.CharField(max_length=10, verbose_name='Номер телефона')
+    date = models.DateTimeField(verbose_name='Дата и время')
+
+    class Meta:
+        verbose_name_plural = 'Зарегистрировавшиеся'
 
 
 class Contacts(models.Model):
@@ -73,7 +58,24 @@ class Contacts(models.Model):
 
 
 class Reviews(models.Model):
-    name = models.CharField(max_length=50, blank=True, default='Не указано', verbose_name='Имя'),
+    name = models.CharField(max_length=50, blank=True, verbose_name='Имя'),
     excursion = models.CharField(max_length=50, verbose_name='Экскурсия')
-    event_date = models.DateTimeField()
+    event_date = models.DateField(verbose_name='Дата посещения')
     date = models.DateTimeField(auto_now=True)
+    text = models.TextField(verbose_name='Отзыв')
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Заголовок')
+    text = RichTextUploadingField(verbose_name='Содержание')
+    likes = models.IntegerField(default=0, editable=False)
+    date_added = models.DateTimeField(auto_now=True, editable=False)
+
+    class Meta:
+        verbose_name_plural = 'Заметки'
+
+    def __str__(self):
+        return self.title
+
+
+

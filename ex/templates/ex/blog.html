@@ -1,0 +1,36 @@
+{% extends "ex/main_page.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    <title>Заметки</title>
+{% endblock %}
+{% block content %}
+{% for post in posts %}
+    <h3><b>{{post.title}}</b></h3>
+    <p>{{post.text}}</p>
+    <p id="date_added">{{post.date_added}}</p>
+    {% bootstrap_icon "heart" %}<p>{{post.likes}}</p>
+{% endfor %}
+<div class="text-center">
+    <div class="pagination">
+        <span class="step-links">
+            {% if posts.has_previous %}
+                <a href="{% url 'ex:blog' %}?page={{ posts.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+            <span class="current">
+                Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+            </span>
+            {% if posts.has_next %}
+                <a href="{% url 'ex:blog' %}?page={{ posts.next_page_number }}">Следующая</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}{% endblock %}
+{% block reviews_act %}{% endblock %}
+{% block blog %}class="active"{% endblock %}>
+
+

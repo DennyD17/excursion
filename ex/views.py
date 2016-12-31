@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, get_list_or_404
-from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from .forms import RegistrationToEventForm
+from .forms import ReviewForm, RegistrationToEventForm
 from . import models
 from excursion import settings
 
@@ -27,25 +27,12 @@ def excursions(request, slug=None):
         except IndexError:
             return render(request, 'ex/excursions.html', {'Error_message': 'Извините, тут пока ничего нет'})
         else:
-            events_for_excursion = models.Event.objects.all().filter(excursion=start_value.id,
-                                                                     starting__gte=timezone.now()).order_by('starting')
             return render(request, 'ex/excursions.html', {'list_of_excursions': list_of_excursions,
-                                                          'first': start_value, 'events': events_for_excursion})
+                                                          'first': start_value})
     else:
         start_value = get_object_or_404(models.Excursion, slug=slug)
-        events_for_excursion = models.Event.objects.all().filter(excursion=start_value.id,
-                                                                 starting__gte=timezone.now()).order_by('starting')
         return render(request, 'ex/excursions.html', {'list_of_excursions': list_of_excursions, 'first': start_value,
-                                                      'slug': slug, 'events': events_for_excursion})
-
-
-def events(request):
-    shedule = get_list_or_404(models.Event.objects.order_by('starting'), starting__gte=timezone.now())
-    return render(request, 'ex/events.html', {'shedule': shedule})
-
-
-def contacts(request):
-    return render(request, 'ex/contacts.html', {'contacts': models.Contacts.objects.all()[0]})
+                                                      'slug': slug})
 
 
 def reg(request):
@@ -60,6 +47,38 @@ def reg(request):
             send_mail('Запись на экскурсию', mes, settings.EMAIL_HOST_USER, ['Denis.Avramenko1705@gmail.com', mailto])
             return HttpResponseRedirect(reverse('ex:registration'))
     else:
-        form = RegistrationToEventForm()
+        form = RegistrationToEventForm(initial={'event': request.GET.get('id', None)})
     people = models.PeopleReg.objects.all()
-    return render(request, 'ex/registration.html', {'form': form, 'people': people})
+    return render(request, 'ex/registration.html', {'form': form, 'people': people,
+                                                    'contacts': models.Contacts.objects.all()[0]})
+
+
+def add_review(request):
+    all_reviews = models.Reviews.objects.all().order_by('date')
+    paginator = Paginator(all_reviews, 5)
+    try:
+        reviews = paginator.page(request.GET.get('page'))
+    except PageNotAnInteger:
+        reviews = paginator.page(1)
+    except EmptyPage:
+        reviews = paginator.page(paginator.num_pages)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('ex:reviews'))
+    else:
+        form = ReviewForm()
+    return render(request, 'ex/reviews.html', {'form': form, 'reviews': reviews})
+
+
+def blog(request):
+    posts = models.Blog.objects.all().order_by('-date_added')
+    paginator = Paginator(posts, 7)
+    try:
+        posts_paginated = paginator.page(request.GET.get('page'))
+    except EmptyPage:
+        posts_paginated = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        posts_paginated = paginator.page(1)
+    return render(request, 'ex/blog.html', {'posts': posts_paginated})

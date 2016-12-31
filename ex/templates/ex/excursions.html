@@ -31,20 +31,9 @@
         <div class="center_place">
             <h1>{{first.name}}</h1><br>
             <p>{{first.description| safe}}</p>
-            {% if events %}
-                {% for event in events %}
-                    <table border= "0"  align="center" frame="above" bordercolor="LightGrey"  width="50%">
-                        <tr>
-                            <td height="200" valign="top">
-                                <h1>{{event.starting}}</h1>
-                            </td>
-                        </tr>
-                    </table>
-                        <br><br><br>
-                {% endfor %}
-            {% else %}
-                <h1>Мероприятий нет</h1>
-            {% endif %}
+            <button class="btn-large">
+                <a href="{% url 'ex:registration' %}?id={{first.id}}">Записаться</a>
+            </button>
         </div>
     </div>
 {% endif %}
@@ -54,3 +43,4 @@
 {% block rasp_act %}{% endblock %}
 {% block zap_act %}{% endblock %}>
 {% block cont_act %}{% endblock %}>
+{% block blog %}{% endblock %}
