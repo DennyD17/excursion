@@ -98,7 +98,11 @@ def like_post(request):
     if post_id:
         post = models.Blog.objects.get(id=int(post_id))
         if post:
+            if post_id in request.COOKIES:
+                return HttpResponse(post.likes)
             post.likes += 1
             post.save()
             likes = post.likes
-    return HttpResponse(likes)
+    response = HttpResponse(likes)
+    response.set_cookie(post_id, 'adw')
+    return response
