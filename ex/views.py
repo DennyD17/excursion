@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404, get_list_or_404
-from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views import generic
 
 from .forms import ReviewForm, RegistrationToEventForm
 from . import models
@@ -54,7 +55,7 @@ def reg(request):
 
 
 def add_review(request):
-    all_reviews = models.Reviews.objects.all().order_by('date')
+    all_reviews = models.Reviews.objects.all().order_by('-date')
     paginator = Paginator(all_reviews, 5)
     try:
         reviews = paginator.page(request.GET.get('page'))
@@ -82,3 +83,22 @@ def blog(request):
     except PageNotAnInteger:
         posts_paginated = paginator.page(1)
     return render(request, 'ex/blog.html', {'posts': posts_paginated})
+
+
+class Post(generic.DetailView):
+    model = models.Blog
+    template_name = 'ex/post.html'
+
+
+def like_post(request):
+    post_id = None
+    if request.method == 'GET':
+        post_id = request.GET.get('post_id')
+    likes = 0
+    if post_id:
+        post = models.Blog.objects.get(id=int(post_id))
+        if post:
+            post.likes += 1
+            post.save()
+            likes = post.likes
+    return HttpResponse(likes)

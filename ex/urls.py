@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^registration$', views.reg, name='registration'),
     url(r'^reviews$', views.add_review, name='reviews'),
     url(r'^blog$', views.blog, name='blog'),
-
+    url(r'^blog/(?P<pk>[\d]+)/$', views.Post.as_view(), name='post'),
+    url(r'^like_post/$', views.like_post, name='like_post'),
 ]
 """
 url(r'^/registration$', ),

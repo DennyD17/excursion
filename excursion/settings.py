@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'datetimewidget',
-    'django_forms_bootstrap',
     'bootstrap3',
 ]
 
@@ -119,7 +118,7 @@ TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = False
 

@@ -1,0 +1,21 @@
+{% extends "ex/main_page.html" %}
+{% load bootstrap3 %}
+{% block title %}
+    <title>{{object.title}}</title>
+{% endblock %}
+{% block content %}
+<div class="text-center">
+    <h1>{{object.title}}</h1>
+    <p>{{object.text|safe}}</p>
+    <p id="date_added">{{object.date_added}}</p>
+    <p>{% bootstrap_icon "heart" %}  {{object.likes}}</p>
+</div>
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}{% endblock %}
+{% block reviews_act %}{% endblock %}
+{% block blog %}class="active"{% endblock %}>
+
+

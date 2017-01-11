@@ -20,6 +20,7 @@ class RegistrationToEventForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    event_date = forms.DateField(input_formats=['%d.%m.%Y', '%m/%d/%Y', '%m/%d/%y'])
 
     class Meta:
         model = Reviews

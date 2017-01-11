@@ -69,7 +69,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок')
     text = RichTextUploadingField(verbose_name='Содержание')
     likes = models.IntegerField(default=0, editable=False)
-    date_added = models.DateTimeField(auto_now=True, editable=False)
+    date_added = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
         verbose_name_plural = 'Заметки'
