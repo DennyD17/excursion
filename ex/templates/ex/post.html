@@ -1,14 +1,22 @@
 {% extends "ex/main_page.html" %}
 {% load bootstrap3 %}
 {% block title %}
-    <title>{{object.title}}</title>
+    <title>{{post.title}}</title>
 {% endblock %}
 {% block content %}
+<input type="button" onclick="location.replace(document.referrer);" value="Назад" class="btn-lg btn-primary"/>
 <div class="text-left">
-    <h1>{{object.title}}</h1>
-    <p>{{object.text|safe}}</p>
-    <p id="date_added">{{object.date_added}}</p>
-    <p>{% bootstrap_icon "heart" %}  {{object.likes}}</p>
+    <h1>{{post.title}}</h1>
+    <p>{{post.text|safe}}</p>
+    <p id="date_added">{{post.date_added}}</p>
+    <button id="likes"
+                {% if liked is True %}
+                    class="btn like"
+                {% else %}
+                    class="btn dislike"
+                {% endif %}
+            type="button" onclick="getAjax('.ajax_{{post.id}}','/like_post/?post_id={{ post.id }}');">
+        {% bootstrap_icon "heart-empty" %}  <span class="ajax_{{post.id}}">{{post.likes}}</span></button>
 </div>
 {% endblock %}
 {% block main_act %}{% endblock %}

@@ -6,25 +6,33 @@
     <title>Заметки</title>
 {% endblock %}
 {% block content %}
+<p>Сортировать по: </p>
+<a href="?sort_by=likes">Колличеству оценок</a>
+<a href="{% url 'ex:blog' %}">дате добавления</a>
 {% for post in posts %}
     <h3><b>{{post.title}}</b></h3>
     <a href="{% url 'ex:post' post.id %}">{{post.text|safe|truncatewords_html:8}}</a>
     <p id="date_added">{{post.date_added}}</p>
-    <button id="likes" data-catid="{{post.id}}" class="btn btn-primary" type="button"
-            onclick="getAjax('.ajax_{{post.id}}','/like_post/?post_id={{ post.id }}');">
+    <button id="likes" data-catid="{{post.id}}"
+                {% if post.id in favorite %}
+                    class="btn like"
+                {% else %}
+                    class="btn dislike"
+                {% endif %}
+            type="button" onclick="getAjax('.ajax_{{post.id}}','/like_post/?post_id={{ post.id }}');">
         {% bootstrap_icon "heart-empty" %}  <span class="ajax_{{post.id}}">{{post.likes}}</span></button><br><br><br>
 {% endfor %}
 <div class="text-center">
     <div class="pagination">
         <span class="step-links">
             {% if posts.has_previous %}
-                <a href="{% url 'ex:blog' %}?page={{ posts.previous_page_number }}">Предыдущая</a>
+                <a href="{% url 'ex:blog' %}?page={{ posts.previous_page_number }}{% if sorted is True %}&sort_by=likes{% endif %}">Предыдущая</a>
             {% endif %}
             <span class="current">
                 Page {{ posts.number }} of {{ posts.paginator.num_pages }}
             </span>
             {% if posts.has_next %}
-                <a href="{% url 'ex:blog' %}?page={{ posts.next_page_number }}">Следующая</a>
+                <a href="{% url 'ex:blog' %}?page={{ posts.next_page_number }}{% if sorted is True %}&sort_by=likes{% endif %}">Следующая</a>
             {% endif %}
         </span>
     </div>

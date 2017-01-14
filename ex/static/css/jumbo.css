@@ -89,3 +89,127 @@ background-color: inherit;
 #id_event_date{
 border-color: #FFFFFF;
 }
+
+
+.like {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.like:focus,
+.like.focus {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #255625;
+}
+.like:hover {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+.like:active,
+.like.active,
+.open > .dropdown-toggle.like {
+  color: #fff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+.like:active:hover,
+.like.active:hover,
+.open > .dropdown-toggle.like:hover,
+.like:active:focus,
+.like.active:focus,
+.open > .dropdown-toggle.like:focus,
+.like:active.focus,
+.like.active.focus,
+.open > .dropdown-toggle.like.focus {
+  color: #fff;
+  background-color: #398439;
+  border-color: #255625;
+}
+.like:active,
+.like.active,
+.open > .dropdown-toggle.like {
+  background-image: none;
+}
+.like.disabled:hover,
+.like[disabled]:hover,
+fieldset[disabled] .like:hover,
+.like.disabled:focus,
+.like[disabled]:focus,
+fieldset[disabled] .like:focus,
+.like.disabled.focus,
+.like[disabled].focus,
+fieldset[disabled] .like.focus {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.like .badge {
+  color: #5cb85c;
+  background-color: #fff;
+}
+
+
+.dislike {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.dislike:focus,
+.dislike.focus {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #1b6d85;
+}
+.dislike:hover {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+.dislike:active,
+.dislike.active,
+.open > .dropdown-toggle.dislike {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+.dislike:active:hover,
+.dislike.active:hover,
+.open > .dropdown-toggle.dislike:hover,
+.dislike:active:focus,
+.dislike.active:focus,
+.open > .dropdown-toggle.dislike:focus,
+.dislike:active.focus,
+.dislike.active.focus,
+.open > .dropdown-toggle.dislike.focus {
+  color: #fff;
+  background-color: #269abc;
+  border-color: #1b6d85;
+}
+.dislike:active,
+.dislike.active,
+.open > .dropdown-toggle.dislike {
+  background-image: none;
+}
+.dislike.disabled:hover,
+.dislike[disabled]:hover,
+fieldset[disabled] .dislike:hover,
+.dislike.disabled:focus,
+.dislike[disabled]:focus,
+fieldset[disabled] .dislike:focus,
+.dislike.disabled.focus,
+.dislike[disabled].focus,
+fieldset[disabled] .dislike.focus {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.dislike .badge {
+  color: #5bc0de;
+  background-color: #fff;
+}
+
+#for_button{
+text-decoration: none;
+color: #FFFFFF; /* Цвет текста */
+}
+

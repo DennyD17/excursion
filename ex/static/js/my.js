@@ -21,5 +21,20 @@ $(document).ready(function (){
 */
 
 function getAjax(divdett,pageload) {
-    $(function(){$(divdett).load(pageload).show();});}
+    $(function(){$(divdett).load(pageload).show()
+    ;})
+    ;}
+
+$(document).ready(function () {
+    $('.dislike').click(function () {
+        $(this).toggleClass('dislike like');
+    });
+});
+
+
+$(document).ready(function () {
+    $('.like').click(function () {
+        $(this).toggleClass('like dislike');
+    });
+})
 

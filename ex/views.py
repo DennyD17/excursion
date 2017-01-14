@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views import generic
 
 from .forms import ReviewForm, RegistrationToEventForm
 from . import models
@@ -74,20 +73,33 @@ def add_review(request):
 
 
 def blog(request):
+    sorting = False
     posts = models.Blog.objects.all().order_by('-date_added')
-    paginator = Paginator(posts, 7)
+    if request.GET.get('sort_by'):
+        sorting = True
+        if request.GET.get('sort_by') == 'likes':
+            posts = models.Blog.objects.all().order_by('-likes')
+    likes = []
+    for post in posts:
+        if str(post.id) in request.COOKIES:
+            likes.append(int(post.id))
+    paginator = Paginator(posts, 5)
     try:
         posts_paginated = paginator.page(request.GET.get('page'))
     except EmptyPage:
         posts_paginated = paginator.page(paginator.num_pages)
     except PageNotAnInteger:
         posts_paginated = paginator.page(1)
-    return render(request, 'ex/blog.html', {'posts': posts_paginated})
+    return render(request, 'ex/blog.html', {'posts': posts_paginated, 'favorite': likes, 'sorted': sorting})
 
 
-class Post(generic.DetailView):
-    model = models.Blog
-    template_name = 'ex/post.html'
+def post_view(request, pk):
+    post = get_object_or_404(models.Blog, id=pk)
+    if str(pk) in request.COOKIES:
+        liked = True
+    else:
+        liked = False
+    return render(request, 'ex/post.html', {'post': post, 'liked': liked})
 
 
 def like_post(request):
@@ -95,14 +107,20 @@ def like_post(request):
     if request.method == 'GET':
         post_id = request.GET.get('post_id')
     likes = 0
+    response = HttpResponse(likes)
     if post_id:
         post = models.Blog.objects.get(id=int(post_id))
         if post:
             if post_id in request.COOKIES:
-                return HttpResponse(post.likes)
-            post.likes += 1
-            post.save()
-            likes = post.likes
-    response = HttpResponse(likes)
-    response.set_cookie(post_id, 'adw')
+                post.likes -= 1
+                post.save()
+                likes = post.likes
+                response = HttpResponse(likes)
+                response.delete_cookie(post_id)
+            else:
+                post.likes += 1
+                post.save()
+                likes = post.likes
+                response = HttpResponse(likes)
+                response.set_cookie(post_id, 'adw')
     return response

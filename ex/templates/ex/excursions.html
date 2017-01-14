@@ -1,4 +1,5 @@
 {% extends "ex/main_page.html" %}
+{% load bootstrap3 %}
 {% block title %}
     <title>Экскурсии</title>
 {% endblock %}
@@ -31,8 +32,8 @@
         <div class="center_place">
             <h1>{{first.name}}</h1><br>
             <p>{{first.description| safe}}</p>
-            <button class="btn-large">
-                <a href="{% url 'ex:registration' %}?id={{first.id}}">Записаться</a>
+            <button class="btn btn-primary">
+                {% bootstrap_icon "star" %}<a id="for_button" href="{% url 'ex:registration' %}?id={{first.id}}"> Записаться</a>
             </button>
         </div>
     </div>
