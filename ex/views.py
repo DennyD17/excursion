@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import ReviewForm, RegistrationToEventForm
 from . import models
@@ -12,11 +13,7 @@ from excursion import settings
 
 def start_page(request):
     about = models.About.objects.all()[0]
-    try:
-        message = models.ImportantNote.objects.all()[0]
-    except IndexError:
-        return render(request, 'ex/main_page.html', {'about': about})
-    return render(request, 'ex/main_page.html', {'message': message, 'about': about})
+    return render(request, 'ex/main_page.html', {'about': about})
 
 
 def excursions(request, slug=None):
@@ -27,12 +24,14 @@ def excursions(request, slug=None):
         except IndexError:
             return render(request, 'ex/excursions.html', {'Error_message': 'Извините, тут пока ничего нет'})
         else:
+            images = models.ExcursionImageStorage.objects.all().filter(excursion=start_value.id)
             return render(request, 'ex/excursions.html', {'list_of_excursions': list_of_excursions,
-                                                          'first': start_value})
+                                                          'first': start_value, 'img': images})
     else:
         start_value = get_object_or_404(models.Excursion, slug=slug)
+        images = models.ExcursionImageStorage.objects.all().filter(excursion=start_value.id)
         return render(request, 'ex/excursions.html', {'list_of_excursions': list_of_excursions, 'first': start_value,
-                                                      'slug': slug})
+                                                      'slug': slug, 'img': images})
 
 
 def reg(request):
@@ -95,11 +94,12 @@ def blog(request):
 
 def post_view(request, pk):
     post = get_object_or_404(models.Blog, id=pk)
+    images = models.BlogImageStore.objects.all().filter(blog=pk)
     if str(pk) in request.COOKIES:
         liked = True
     else:
         liked = False
-    return render(request, 'ex/post.html', {'post': post, 'liked': liked})
+    return render(request, 'ex/post.html', {'post': post, 'liked': liked, 'img': images})
 
 
 def like_post(request):
@@ -122,5 +122,5 @@ def like_post(request):
                 post.save()
                 likes = post.likes
                 response = HttpResponse(likes)
-                response.set_cookie(post_id, 'adw')
+                response.set_cookie(post_id, 'adw', max_age=99999999)
     return response

@@ -5,12 +5,23 @@
 {% endblock %}
 {% block content %}
 {% for review in reviews %}
-    <p>{{review.date}}</p>
-    <h4><b>Экскурсия:</b>{{review.excursion}}</h4>
-    <h4><b>Дата посещения:</b>{{review.event_date|date:"d.m.Y"}}</h4>
-    <h4><b>Отзыв:</b></h4>
-    <p>{{review.text}}</p>
-    <br><br>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                <p style="color: #D3D3D3;">{{review.date|date:"d E Y"}}</p>
+                <h4 style="margin-bottom: 0;"><b>Экскурсия</b></h4>
+                <p style="overflow: hidden;">{{review.excursion}}</p>
+                <h4 style="margin-bottom: 0;"><b>Дата посещения</b></h4>
+                <p>{{review.event_date|date:"d E Y"}}</p>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-9 col-xs-12">
+                <p>{{review.text | safe}}</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr>
 {% endfor %}
 <form method="post" class="form">
   {% csrf_token %}
@@ -25,13 +36,13 @@
     <div class="pagination">
         <span class="step-links">
             {% if reviews.has_previous %}
-                <a href="{% url 'ex:reviews' %}?page={{ reviews.previous_page_number }}">Предыдущая</a>
+                <a href="{% url 'ex:reviews' %}?page={{ reviews.previous_page_number }}">Предыдущая</a>&nbsp;&nbsp;&nbsp;
             {% endif %}
             <span class="current">
-                Page {{ reviews.number }} of {{ reviews.paginator.num_pages }}
+                {{ reviews.number }} из {{ reviews.paginator.num_pages }}
             </span>
             {% if reviews.has_next %}
-                <a href="{% url 'ex:reviews' %}?page={{ reviews.next_page_number }}">Следующая</a>
+                &nbsp;&nbsp;&nbsp; <a href="{% url 'ex:reviews' %}?page={{ reviews.next_page_number }}">Следующая</a>
             {% endif %}
         </span>
     </div>

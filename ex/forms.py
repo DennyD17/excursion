@@ -1,5 +1,4 @@
 from django import forms
-from django.utils import timezone
 
 from datetimewidget.widgets import DateTimeWidget
 
@@ -20,7 +19,8 @@ class RegistrationToEventForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
-    event_date = forms.DateField(input_formats=['%d.%m.%Y', '%m/%d/%Y', '%m/%d/%y'])
+    event_date = forms.DateField(input_formats=['%d.%m.%Y', '%m/%d/%Y', '%m/%d/%y'],
+                                 label='Дата посещения')
 
     class Meta:
         model = Reviews

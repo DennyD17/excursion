@@ -5,8 +5,17 @@
 {% endblock %}
 {% block content %}
 <input type="button" onclick="location.replace(document.referrer);" value="Назад" class="btn-lg btn-primary"/>
+<br>
+
+<h1 class="text-center">{{post.title}}</h1>
+{% if img %}
+    {% for one in img %}
+        <a href="{{one.img.url}}" class="flipLightBox">
+            <img src="{{one.img.url}}" style="width: 22% ; height: 200px; padding-bottom: 5px;">
+                <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
+    {% endfor %}
+{% endif %}
 <div class="text-left">
-    <h1>{{post.title}}</h1>
     <p>{{post.text|safe}}</p>
     <p id="date_added">{{post.date_added}}</p>
     <button id="likes"

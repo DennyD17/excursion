@@ -7,7 +7,7 @@
 {% if Error_message %}
     <p>{{Error_message}}</p>
 {% else %}
-    <div class="col-lg-2 col-md-4 col-xs-12">
+    <div class="col-lg-3 col-md-4 col-xs-12">
         <ul class="nav nav-pills nav-stacked" >
             {% if slug %}
                 {% for ex in list_of_excursions %}
@@ -28,14 +28,19 @@
             {% endif %}
         </ul>
     </div>
-    <div class="col-lg-10 col-md-8 col-xs-12">
-        <div class="center_place">
-            <h1>{{first.name}}</h1><br>
+    <div class="col-lg-9 col-md-8 col-xs-12" style="margin-top:0px;">
+            <h1 style="margin-top: 0;">{{first.name}}</h1><br>
+                {% if img %}
+                    {% for one in img %}
+                        <a href="{{one.img.url}}" class="flipLightBox">
+                            <img src="{{one.img.url}}" style="width: 150px ; height: 150px; padding-bottom: 5px;">
+                                <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
+                    {% endfor %}
+                {% endif %}
             <p>{{first.description| safe}}</p>
             <button class="btn btn-primary">
                 {% bootstrap_icon "star" %}<a id="for_button" href="{% url 'ex:registration' %}?id={{first.id}}"> Записаться</a>
             </button>
-        </div>
     </div>
 {% endif %}
 {% endblock %}

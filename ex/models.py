@@ -2,13 +2,6 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
-class ImportantNote (models.Model):
-    title = RichTextUploadingField(blank=True, verbose_name='Важное сообщение на главной странице')
-
-    class Meta:
-        verbose_name_plural = 'Важное сообщение на главной странице'
-
-
 class About (models.Model):
     title = models.CharField(max_length=50, blank=True, verbose_name='Заголовок')
     text = RichTextUploadingField(verbose_name='Текст')
@@ -32,6 +25,16 @@ class Excursion (models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ExcursionImageStorage(models.Model):
+    excursion = models.ForeignKey(Excursion, on_delete=models.CASCADE)
+    img = models.ImageField(verbose_name='Изображение', upload_to='images')
+    img_alt = models.CharField(blank=True, verbose_name='Описание изображения(опционально)', max_length=50)
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения для экскурсий'
 
 
 class PeopleReg(models.Model):
@@ -64,6 +67,10 @@ class Reviews(models.Model):
     date = models.DateTimeField(auto_now=True)
     text = models.TextField(verbose_name='Отзыв')
 
+    def save(self, *args, **kwargs):
+        self.text = self.text.replace('\n', '<br>')
+        super(Reviews, self).save(*args, **kwargs)
+
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок')
@@ -76,6 +83,17 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BlogImageStore(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='images', verbose_name='Изображение')
+    img_alt = models.CharField(max_length=100, verbose_name='Описание изображения (опционально', blank=True)
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения для Блога'
+
 
 
 

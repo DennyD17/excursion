@@ -8,13 +8,13 @@ $(document).ready(function(){
 });
 
 /*
-$(document).ready(function (){
+$(document).ready(function ()
     $('.btn').click(function(){
         var catid;
         catid = $(this).attr("data-catid");
-        var uniq_id = ".axaj_"+catid;
+        var uniq_id = ".ajax_"+catid;
         $.get('/like_post/', {post_id: catid}, function(data){
-            $(".ajax_3").html(data);
+            $(uniq_id).html(data);
         });
     });
 });
@@ -36,5 +36,14 @@ $(document).ready(function () {
     $('.like').click(function () {
         $(this).toggleClass('like dislike');
     });
+})
+
+
+$(document).ready(function () {
+    $('.sidebar').height($(document).height());
+})
+
+$(document).ready(function () {
+    $('#center').height($(document).height());
 })
 

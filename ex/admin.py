@@ -2,8 +2,23 @@ from django.contrib import admin
 from . import models
 
 
+class ChoiceInline(admin.StackedInline):
+    model = models.ExcursionImageStorage
+    extra = 2
+
+
 class ExcursionAdmin (admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
+    inlines = [ChoiceInline]
+
+
+class BlogImgInline(admin.StackedInline):
+    model = models.BlogImageStore
+    extra = 2
+
+
+class BlogAdmin(admin.ModelAdmin):
+    inlines = [BlogImgInline]
 
 
 class OneNoteAdmin (admin.ModelAdmin):
@@ -32,6 +47,7 @@ class PeopleTable(admin.ModelAdmin):
 admin.site.register(models.About, OneNoteAdmin)
 admin.site.register(models.Contacts, OneNoteAdmin)
 admin.site.register(models.Excursion, ExcursionAdmin)
-admin.site.register(models.ImportantNote)
 admin.site.register(models.PeopleReg, PeopleTable)
-admin.site.register(models.Blog)
+admin.site.register(models.Blog, BlogAdmin)
+admin.site.register(models.BlogImageStore)
+admin.site.register(models.ExcursionImageStorage)

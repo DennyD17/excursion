@@ -112,16 +112,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Moscow'
+
+USE_TZ = False
 
 USE_I18N = True
 
 USE_L10N = False
 
-USE_TZ = False
+LANGUAGE_CODE = 'ru-RU'
 
+# Пример вывода: 16 сентября 2012
+DATE_FORMAT = 'd E Y'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

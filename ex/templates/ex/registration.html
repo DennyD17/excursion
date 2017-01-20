@@ -8,24 +8,17 @@
 {% endblock %}
 {% block content %}
 <h1>{{contacts.title}}</h1>
-<p>{{contacts.text}}</p>
+<p>{{contacts.text|safe}}</p>
 {% if contacts.img %}
     <img src="{{about.img.url}}" class="img-rounded">
 {% endif %}
 <form method="post" class="form">
   {% csrf_token %}
   {% bootstrap_form form %}
-  {% buttons %}
     <button type="submit" class="btn btn-primary">
       {% bootstrap_icon "star" %} Записаться
     </button>
-  {% endbuttons %}
 </form>
-
-<h1>{{name}}</h1>
-{% for human in people %}
-    <p>{{human.event}}   {{human.name}}   {{human.email}}   {{human.phone}}   {{human.date}}</p>
-{% endfor %}
 {% endblock %}
 {% block main_act %}{% endblock %}
 {% block ex_act %}{% endblock %}
