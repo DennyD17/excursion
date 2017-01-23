@@ -15,7 +15,7 @@
 {% for post in posts %}
     <hr>
     <p style="color: #D3D3D3;">{{post.date_added|date:"d E Y H:i"}}</p>
-    <h1 style="margin-top: 0px"><a style="color: inherit; text-decoration: none;" href="{% url 'ex:post' post.id %}">{{post.title}}</a></h1>
+    <h1 style="margin-top: 0px; font-size: 28px"><a style="color: inherit; text-decoration: none;" href="{% url 'ex:post' post.id %}">{{post.title}}</a></h1>
     <a style="text-decoration: none;color: inherit;" href="{% url 'ex:post' post.id %}">{{post.text|safe|truncatewords_html:12}}</a>
     <button id="likes"
                 {% if post.id in favorite %}

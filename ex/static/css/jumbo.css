@@ -47,6 +47,7 @@ color: #FFFFFF; /* Цвет текста */
   min-height: 100vh;
   overflow: hidden;
   background: #F5F5F5;
+  background: url("../images/foggy_birds.png") repeat;
 }
 
 
@@ -56,10 +57,65 @@ color: #FFFFFF; /* Цвет текста */
 }
 
 
-h1{color: #FF6200;}
+h1{
+  font-family: "Lemon Tuesday";
+  color: #FF6200;
+}
 
 
-h4{color: #FF6200;}
+h4{
+  color: #FF6200;
+}
+
+
+/* font-family: "LobsterRegular"; */
+@font-face {
+    font-family: "LobsterRegular";
+    src: url("../fonts/LobsterRegular.eot");
+    src: url("../fonts/LobsterRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/LobsterRegular.woff") format("woff"),
+    url("../fonts/LobsterRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Nautilus Pompilius';
+    src: local('Nautilus Pompilius'), local('NautilusPompilius'), url('../fonts/nautiluspompilius.woff2') format('woff2'), url('../fonts/nautiluspompilius.woff') format('woff'), url('../fonts/nautiluspompilius.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Lemon Tuesday';
+    src: local('Lemon Tuesday'), local('LemonTuesday'), url('../fonts/Lemontuesday.woff2') format('woff2'), url('../fonts/Lemontuesday.woff') format('woff'), url('../fonts/Lemontuesday.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 35px;
+  line-height: 20px;
+  font-family: "Nautilus Pompilius";
+}
+.navbar-brand:hover,
+.navbar-brand:focus {
+  text-decoration: none;
+}
+.navbar-brand > img {
+  display: block;
+}
+@media (min-width: 768px) {
+  .navbar > .container .navbar-brand,
+  .navbar > .container-fluid .navbar-brand {
+    margin-left: -15px;
+  }
+}
 
 /*
 ************
@@ -131,7 +187,8 @@ background-color: rgba(0, 120, 201, 1);
 
 
 .navbar-inverse {
-  background-color: #FFD673;
+  background: #FFD673;
+  background: linear-gradient(to top, #FFD673, #FFc740) ;
   border-color: #FFAD40;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -140,11 +197,11 @@ background-color: rgba(0, 120, 201, 1);
 
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: #FF2C00;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #fff;
+  color: #FF6200;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {
