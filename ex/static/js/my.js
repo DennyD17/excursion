@@ -39,11 +39,8 @@ $(document).ready(function () {
 })
 
 
+/**
 $(document).ready(function () {
-    $('.sidebar').height($(document).height());
+    $('.content').height($(document).height() - $('footer').height() - $('nav').height());
 })
-
-$(document).ready(function () {
-    $('#center').height($(document).height());
-})
-
+**/

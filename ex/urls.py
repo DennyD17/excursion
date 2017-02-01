@@ -1,4 +1,6 @@
 from django.conf.urls import url
+from django.contrib.flatpages.views import flatpage
+
 from . import views
 
 app_name = 'ex'
@@ -12,6 +14,7 @@ urlpatterns = [
     url(r'^blog$', views.blog, name='blog'),
     url(r'^blog/(?P<pk>[\d]+)/$', views.post_view, name='post'),
     url(r'^like_post/$', views.like_post, name='like_post'),
+    url(r'^about-me/$', flatpage, {'url': '/about-me/'}, name='about-me'),
 ]
 """
 url(r'^/registration$', ),

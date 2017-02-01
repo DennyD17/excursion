@@ -1,5 +1,15 @@
 from django.contrib import admin
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
+from django.db.models import TextField
 from . import models
+
+from ckeditor.widgets import CKEditorWidget
+
+
+class FlatPageCustom(FlatPageAdmin):
+    formfield_overrides = {TextField: {'widget': CKEditorWidget}}
+    prepopulated_fields = {"url": ("title",)}
 
 
 class ChoiceInline(admin.StackedInline):
@@ -51,3 +61,5 @@ admin.site.register(models.PeopleReg, PeopleTable)
 admin.site.register(models.Blog, BlogAdmin)
 admin.site.register(models.BlogImageStore)
 admin.site.register(models.ExcursionImageStorage)
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageCustom)

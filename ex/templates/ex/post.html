@@ -9,11 +9,13 @@
 
 <h1 class="text-center">{{post.title}}</h1>
 {% if img %}
+<div style="margin: auto; width: 90%;">
     {% for one in img %}
         <a href="{{one.img.url}}" class="flipLightBox">
-            <img src="{{one.img.url}}" style="width: 22% ; height: 200px; padding-bottom: 5px;">
+            <img src="{{one.img.url}}" style="width: 24.6% ; height: 200px; padding-bottom: 5px; padding-top:5px;">
                 <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
     {% endfor %}
+</div>
 {% endif %}
 <div class="text-left">
     <p>{{post.text|safe}}</p>

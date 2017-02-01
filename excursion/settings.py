@@ -21,6 +21,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'ex/static')
 MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = ""
 
+
+SITE_ID = 1
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'ex',
     'ckeditor',
     'ckeditor_uploader',
@@ -137,4 +142,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PASSWORD = PASS
 EMAIL_HOST_USER = USER
 EMAIL_PORT = 587
+
+
 

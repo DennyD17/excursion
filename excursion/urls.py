@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^pages/', include('django.contrib.flatpages.urls')),
    ]
 
 handler404 = 'excursion.views.h404'
