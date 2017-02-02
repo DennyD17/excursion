@@ -37,7 +37,7 @@
                                 <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
                     {% endfor %}
                 {% endif %}
-            <p>{{first.description| safe}}</p>
+            <div style="overflow: hidden";><p>{{first.description| safe}}</p></div>
             <button class="btn btn-primary">
                 {% bootstrap_icon "star" %}<a id="for_button" href="{% url 'ex:registration' %}?id={{first.id}}"> Записаться</a>
             </button>

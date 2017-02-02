@@ -20,8 +20,9 @@ html {
 body {
 font-family: "PT Sans";
 background: #FFFFFF;
-color: #2F4F4F;
-font-size: 150%;
+color: #000;
+font-size: 17px;
+line-height: 25px;
 background: url("../images/foggy_birds.png") repeat;
 min-height: 100%;
 }
@@ -119,11 +120,31 @@ h4{
 .navbar-brand > img {
   display: block;
 }
+
+
 @media (min-width: 768px) {
-  .navbar > .container .navbar-brand,
-  .navbar > .container-fluid .navbar-brand {
-    margin-left: -15px;
+  .container {
+    width: 600px;
   }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 800px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1000px;
+  }
+}
+
+#foot{
+  color: inherit;
+}
+
+#foot:hover{
+color: #0c3c26;
+font-weight: bold;
 }
 
 /*

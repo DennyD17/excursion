@@ -4,20 +4,8 @@
     <title>{{post.title}}</title>
 {% endblock %}
 {% block content %}
-<input type="button" onclick="location.replace(document.referrer);" value="Назад" class="btn-lg btn-primary"/>
-<br>
-
-<h1 class="text-center">{{post.title}}</h1>
-{% if img %}
-<div style="margin: auto; width: 90%;">
-    {% for one in img %}
-        <a href="{{one.img.url}}" class="flipLightBox">
-            <img src="{{one.img.url}}" style="width: 24.6% ; height: 200px; padding-bottom: 5px; padding-top:5px;">
-                <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
-    {% endfor %}
-</div>
-{% endif %}
-<div class="text-left">
+<h1 class="text-left" style="margin-left: 15px;">{{post.title}}</h1>
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
     <p>{{post.text|safe}}</p>
     <p id="date_added">{{post.date_added}}</p>
     <button id="likes"
@@ -28,7 +16,22 @@
                 {% endif %}
             type="button" onclick="getAjax('.ajax_{{post.id}}','/like_post/?post_id={{ post.id }}');">
         {% bootstrap_icon "heart-empty" %}  <span class="ajax_{{post.id}}">{{post.likes}}</span></button>
+    <br><br><br><br>
+    <input type="button" onclick="location.replace(document.referrer);" value="Назад" class="btn-sm btn-primary"/>
 </div>
+<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+    {% if img %}
+            {% for one in img %}
+                <p></p>
+                <div style="width: 100%;">
+                <a href="{{one.img.url}}" class="flipLightBox">
+                <img src="{{one.img.url}}" style="width: 100% ; padding-bottom: 5px; padding-top:5px;">
+                <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
+                </div>
+            {% endfor %}
+    {% endif %}
+</div>
+<br>
 {% endblock %}
 {% block main_act %}{% endblock %}
 {% block ex_act %}{% endblock %}
