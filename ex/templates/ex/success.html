@@ -1,0 +1,18 @@
+{% extends "ex/main_page.html" %}
+{% block title %}
+    <title>Успешно</title>
+{% endblock %}
+{% block content %}
+<script>
+  setTimeout( 'location="/";', 10000 );
+</script>
+<p style="color: #4cae4c"><b>Вы успешно записались на экскурсию.
+    <br>На указанную электронную почту отправлено письмо с подтверждением.
+    <br>В ближайшее время я с вами свяжусь.</b></p>
+{% endblock %}
+{% block main_act %}{% endblock %}
+{% block ex_act %}{% endblock %}
+{% block rasp_act %}{% endblock %}
+{% block zap_act %}class="active"{% endblock %}>
+{% block cont_act %}{% endblock %}>
+{% block blog %}{% endblock %}

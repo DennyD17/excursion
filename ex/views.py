@@ -44,7 +44,7 @@ def reg(request):
                 ', доброго времени суток! \nПоздравляю, вы успешно записаны на экскурсию ' + \
                 str(form.cleaned_data.get('event'))
             send_mail('Запись на экскурсию', mes, settings.EMAIL_HOST_USER, ['Denis.Avramenko1705@gmail.com', mailto])
-            return HttpResponseRedirect(reverse('ex:registration'))
+            return HttpResponseRedirect(reverse('ex:success'))
     else:
         form = RegistrationToEventForm(initial={'event': request.GET.get('id', None)})
     people = models.PeopleReg.objects.all()

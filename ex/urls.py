@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.contrib.flatpages.views import flatpage
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -15,6 +16,7 @@ urlpatterns = [
     url(r'^blog/(?P<pk>[\d]+)/$', views.post_view, name='post'),
     url(r'^like_post/$', views.like_post, name='like_post'),
     url(r'^about-me/$', flatpage, {'url': '/about-me/'}, name='about-me'),
+    url(r'^registration/success/$', TemplateView.as_view(template_name='ex/success.html'), name='success')
 ]
 """
 url(r'^/registration$', ),
