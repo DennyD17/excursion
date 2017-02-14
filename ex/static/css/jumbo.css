@@ -124,12 +124,12 @@ h4{
 
 @media (min-width: 768px) {
   .container {
-    width: 600px;
+    width: 700px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 800px;
+    width: 850px;
   }
 }
 @media (min-width: 1200px) {
