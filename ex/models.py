@@ -40,7 +40,7 @@ class ExcursionImageStorage(models.Model):
 class PeopleReg(models.Model):
     event = models.ForeignKey(Excursion, on_delete=models.CASCADE, verbose_name='Экскурсия')
     name = models.CharField(max_length=25, verbose_name='Имя')
-    email = models.EmailField(verbose_name='почта')
+    email = models.EmailField(verbose_name='e-mail')
     phone = models.CharField(max_length=10, verbose_name='Номер телефона')
     date = models.DateTimeField(verbose_name='Дата и время')
 
