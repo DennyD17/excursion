@@ -38,9 +38,11 @@
                     {% endfor %}
                 {% endif %}
             <div style="overflow: hidden";><p>{{first.description| safe}}</p></div>
+            <div style="margin-top: 50px;">
             <button class="btn btn-primary">
                 {% bootstrap_icon "star" %}<a id="for_button" href="{% url 'ex:registration' %}?id={{first.id}}"> Записаться</a>
             </button>
+            </div>
     </div>
 {% endif %}
 {% endblock %}
