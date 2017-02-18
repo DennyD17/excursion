@@ -63,6 +63,15 @@ footer {
   padding: 10px;
 }
 
+footer > #lwords{
+  float: left;
+  width: 50%;
+}
+
+footer > #rwords{
+  float: right;
+  text-align: right;
+}
 
 /**
 #footer{
