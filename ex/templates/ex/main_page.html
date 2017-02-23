@@ -34,7 +34,7 @@
                 </div>
                 <div id="navbarCollapse" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li {% block main_act %}class="active"{% endblock %}><a href="\">О проекте</a></li>
+                        <!--li {% block main_act %}class="active"{% endblock %}><a href="\">О проекте</a></li-->
                         <li {% block ex_act %} {% endblock %}><a href="{% url 'ex:excursions' %}">Экскурсии</a></li>
                         <li {% block zap_act %}{% endblock %}><a href="{% url 'ex:registration' %}">Цены и запись</a></li>
                         <li {% block reviews_act %}{% endblock %}><a href="{% url 'ex:reviews' %}">Отзывы</a></li>
