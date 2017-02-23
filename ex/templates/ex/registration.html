@@ -7,7 +7,7 @@
   {{ form.media }}
 {% endblock %}
 {% block content %}
-<h1>{{contacts.title}}</h1>
+<h1 class="text-center">{{contacts.title}}</h1>
 <p>{{contacts.text|safe}}</p>
 {% if contacts.img %}
     <img src="{{about.img.url}}" class="img-rounded">
