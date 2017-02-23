@@ -44,7 +44,7 @@ min-height: 100%;
   box-sizing: border-box;
   min-height: 100%;
   height: auto;
-  padding-bottom: 90px;
+  padding-bottom: 40px;
   background: inherit;
   box-shadow:
             5px 0 15px rgba(0, 0, 0, 0.1),
@@ -53,14 +53,16 @@ min-height: 100%;
 
 
 footer {
-  height: 80px;
-  margin-top: -80px;
+  height: 30px;
+  margin-top: -30px;
   background: #FFD673;
   background: linear-gradient(to top, #FFD673, #FFc740) ;
   box-shadow:
             5px 0 15px rgba(0, 0, 0, 0.1),
             -5px 0 15px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 9px 15px 9px 15px;
 }
 
 footer > #lwords{
@@ -130,6 +132,14 @@ h4{
   display: block;
 }
 
+@media (max-width: 500px) {
+  footer {
+    display: none;
+  }
+  .content {
+    padding-bottom: 10px;
+  }
+}
 
 @media (min-width: 768px) {
   .container {
