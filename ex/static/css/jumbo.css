@@ -108,6 +108,7 @@ color: #FFFFFF; /* Цвет текста */
 h1{
   font-family: "Lemon Tuesday";
   color: #FF6200;
+  margin-top: 0;
 }
 
 
