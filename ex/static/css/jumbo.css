@@ -164,8 +164,14 @@ h4{
 #foot:hover{
 color: #0c3c26;
 font-weight: bold;
+
 }
 
+
+#ex-navs{
+  font-weight: bold;
+  line-height: 20px;
+}
 /*
 ************
 changed bootstrap classes
