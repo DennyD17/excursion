@@ -26,5 +26,3 @@ urlpatterns = [
     url(r'^pages/', include('django.contrib.flatpages.urls')),
    ]
 
-handler404 = 'excursion.views.h404'
-handler500 = 'excursion.views.h500'
