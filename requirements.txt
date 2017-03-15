@@ -1,0 +1,10 @@
+Django==1.10.3
+Pillow==4.0.0
+beautifulsoup4==4.5.3
+bs4==0.0.1
+django-bootstrap3==8.1.0
+django-ckeditor==5.2.1
+django-datetime-widget==0.9.3
+olefile==0.44
+psycopg2==2.6.2
+pytz==2016.10

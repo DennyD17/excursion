@@ -13,7 +13,7 @@ from excursion import settings
 
 def start_page(request):
     about = models.About.objects.all()[0]
-    return render(request, 'ex/main_page.html', {'about': about})
+    return render(request, 'ex/index.html', {'about': about})
 
 
 def excursions(request, slug=None):

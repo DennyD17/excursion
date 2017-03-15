@@ -29,11 +29,11 @@
         </ul>
     </div>
     <div class="col-lg-9 col-md-8 col-xs-12" style="margin-top:0px; margin-bottom: 20px">
-            <h1 class="text-center" style="margin-top: 0;">{{first.name|safe}}</h1><br>
+            <h1 class="text-center">{{first.name|safe}}</h1><br>
                 {% if img %}
                     {% for one in img %}
                         <a href="{{one.img.url}}" class="flipLightBox">
-                            <img src="{{one.img.url}}" style="width: 150px ; height: 150px; padding-bottom: 5px;">
+                            <img src="{{one.img.url}}" style="width: 24.4% ; height: 150px; padding-bottom: 5px;">
                                 <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
                     {% endfor %}
                 {% endif %}
