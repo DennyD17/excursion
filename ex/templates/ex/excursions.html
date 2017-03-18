@@ -1,5 +1,6 @@
 {% extends "ex/index.html" %}
 {% load bootstrap3 %}
+{% load thumbnail %}
 {% block title %}
     <title>Экскурсии</title>
 {% endblock %}
@@ -31,11 +32,15 @@
     <div class="col-lg-9 col-md-8 col-xs-12" style="margin-top:0px; margin-bottom: 20px">
             <h1 class="text-center">{{first.name|safe}}</h1><br>
                 {% if img %}
+                    <div class="block_with_photos" style="width: 95%; margin: auto;">
                     {% for one in img %}
-                        <a href="{{one.img.url}}" class="flipLightBox">
-                            <img src="{{one.img.url}}" style="width: 24.4% ; height: 150px; padding-bottom: 5px;">
+                            <a href="{{one.img.url}}" class="flipLightBox">
+                                {% thumbnail one.img "150x150" crop="center" as im %}
+                                    <img src="{{im.url}}"  width="{{ im.width }}" height="{{ im.height }}">
+                                {% endthumbnail %}
                                 <span>{% if one.img_alt %}{{one.img_alt}}{% endif %}</span></a>
                     {% endfor %}
+                    </div>
                 {% endif %}
             <div style="overflow: hidden";><p>{{first.description| safe}}</p></div>
             <div style="margin-top: 50px;">
